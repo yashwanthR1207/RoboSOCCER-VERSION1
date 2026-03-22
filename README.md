@@ -1,6 +1,6 @@
-# 🤖 RC Tank — Arduino + FlySky + BTS7960
+# ⚽ Robo Soccer — Arduino + FlySky + BTS7960
 
-A tank-drive RC robot controlled via a **FlySky receiver** with dual **BTS7960 motor drivers** and an **Arduino**. Supports full tank-style mixing for smooth forward, backward, and pivot turns.
+A competitive **robot soccer bot** built with an Arduino, controlled via a **FlySky RC transmitter**, powered by dual **BTS7960 motor drivers** for fast, responsive tank-drive movement on the field.
 
 ---
 
@@ -12,7 +12,7 @@ A tank-drive RC robot controlled via a **FlySky receiver** with dual **BTS7960 m
 | RC Receiver | FlySky FS-iA6B (or compatible PPM) |
 | Motor Driver ×2 | BTS7960 43A H-Bridge |
 | Motors | DC gear motors (left & right side) |
-| Power | 7.4V–12V LiPo / battery pack |
+| Power | 7.4V–12V LiPo battery |
 
 ---
 
@@ -22,8 +22,8 @@ A tank-drive RC robot controlled via a **FlySky receiver** with dual **BTS7960 m
 
 | Receiver Channel | Arduino Pin | Function |
 |---|---|---|
-| CH1 | D8 | Steering (Left/Right) |
-| CH2 | D9 | Throttle (Forward/Backward) |
+| CH1 | D8 | Steering (Left / Right) |
+| CH2 | D9 | Throttle (Forward / Backward) |
 
 ### BTS7960 Driver 1 — LEFT Motors
 
@@ -31,8 +31,8 @@ A tank-drive RC robot controlled via a **FlySky receiver** with dual **BTS7960 m
 |---|---|
 | RPWM | D3 |
 | LPWM | D4 |
-| REN | D5 |
-| LEN | D6 |
+| REN  | D5 |
+| LEN  | D6 |
 
 ### BTS7960 Driver 2 — RIGHT Motors
 
@@ -40,8 +40,8 @@ A tank-drive RC robot controlled via a **FlySky receiver** with dual **BTS7960 m
 |---|---|
 | RPWM | D7 |
 | LPWM | D2 |
-| REN | D11 |
-| LEN | D12 |
+| REN  | D11 |
+| LEN  | D12 |
 
 ---
 
@@ -53,20 +53,20 @@ The FlySky receiver outputs a **PPM signal (1000–2000 µs)**. `pulseIn()` read
 - **1500 µs** → center / stopped
 - **2000 µs** → full right / full forward
 
-A failsafe returns `1500` (stopped) if no signal is detected within 25 ms.
+If no signal is received within 25 ms, the bot safely stops (failsafe returns 1500).
 
 ### Tank-Style Mixing
-The throttle and steering channels are combined to produce independent left/right wheel speeds:
+Throttle and steering channels are combined for independent left/right wheel control:
 
 ```
 leftSpeed  = throttle + steering
 rightSpeed = throttle - steering
 ```
 
-Both values are clamped to `[-255, 255]` for PWM output.
+This allows the bot to drive forward, reverse, pivot in place, and arc-turn — ideal for chasing a ball on the soccer field.
 
 ### Dead Zone
-A ±15 dead zone filters out joystick drift near center — preventing the robot from creeping when sticks are released.
+A ±15 dead zone on both channels prevents the bot from drifting when joysticks are at center, keeping it stationary during gameplay pauses.
 
 ---
 
@@ -74,28 +74,23 @@ A ±15 dead zone filters out joystick drift near center — preventing the robot
 
 ### 1. Clone the repo
 ```bash
-git clone https://github.com/yashwanthR1207/<repo-name>.git
-cd <repo-name>
+git clone https://github.com/yashwanthR1207/robo-soccer.git
+cd robo-soccer
 ```
 
-### 2. Open in Arduino IDE or PlatformIO
-
-**Arduino IDE:**
-- Open `src/main.cpp` (rename to `main.ino` if needed)
-- Select your board under **Tools → Board**
-- Upload
-
-**PlatformIO:**
-```bash
-pio run --target upload
-```
+### 2. Open in Arduino IDE
+- Open `robo_soccer/robo_soccer.ino`
+- Go to **Tools → Board** and select your Arduino model
+- Select the correct **Port**
+- Click **Upload**
 
 ### 3. Serial Monitor
-Open Serial Monitor at **9600 baud** to watch live motor speed output:
+Open Serial Monitor at **9600 baud** to see live motor output:
 ```
-L:200 R:180
-L:0 R:0
-L:-150 R:-150
+Robo Soccer Ready!
+L:200  R:180
+L:255  R:100
+L:0    R:0
 ```
 
 ---
@@ -103,39 +98,36 @@ L:-150 R:-150
 ## 📁 Project Structure
 
 ```
-rc-tank/
-├── src/
-│   └── main.cpp        # Main Arduino sketch
-├── README.md           # This file
-└── platformio.ini      # (optional) PlatformIO config
+robo-soccer/
+├── robo_soccer/
+│   └── robo_soccer.ino     # Main Arduino sketch
+└── README.md
 ```
 
 ---
 
-##  Configuration
-
-You can tune these values in `main.cpp`:
+## ⚙️ Tunable Parameters
 
 | Parameter | Location | Default | Description |
 |---|---|---|---|
-| Dead zone threshold | `loop()` | `15` | Minimum speed before motor activates |
-| Failsafe value | `readChannel()` | `1500` | PPM value returned on signal loss |
+| `DEAD_ZONE` | top of sketch | `15` | Minimum speed before motor activates |
+| Failsafe value | `readChannel()` | `1500` | PPM value on signal loss (stop) |
 | PWM timeout | `readChannel()` | `25000 µs` | Max wait time for pulse |
 
 ---
 
-## Dependencies
+## 🛠️ Dependencies
 
-- Arduino core (`Arduino.h`) — no external libraries required
+- Arduino core only — **no external libraries needed**
 
 ---
 
-## License
+## 📄 License
 
 MIT License — free to use, modify, and distribute.
 
 ---
 
-##  Author
+## 👤 Author
 
 **Yashwanth R** — [@yashwanthR1207](https://github.com/yashwanthR1207)
