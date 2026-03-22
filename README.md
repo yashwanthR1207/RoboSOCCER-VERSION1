@@ -172,8 +172,6 @@ No external libraries required.
 Uses **Arduino core only** — works out of the box with any standard Arduino IDE installation.
 
 ---
-
-
 ---
 
 <div align="center">
