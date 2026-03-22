@@ -42,7 +42,7 @@
 | RC Receiver | FlySky FS-iA6B (or compatible PPM) |
 | Motor Driver x2 | BTS7960 43A H-Bridge |
 | Motors | DC gear motors (left & right side) |
-| Power | 7.4V – 12V LiPo battery |
+| Power | 12V 3S LiPo battery |
 
 ---
 
