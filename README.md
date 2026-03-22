@@ -30,7 +30,7 @@
 - [Project Structure](#project-structure)
 - [Tunable Parameters](#tunable-parameters)
 - [Dependencies](#dependencies)
-- [License](#license)
+  
 
 ---
 
