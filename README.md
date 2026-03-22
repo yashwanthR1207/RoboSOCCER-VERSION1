@@ -12,7 +12,6 @@
 **Arduino · FlySky FS-iA6B · BTS7960 43A · Tank Drive**
 
 ![Arduino](https://img.shields.io/badge/Arduino-00979D?style=flat-square&logo=arduino&logoColor=white)
-![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
 ![Platform](https://img.shields.io/badge/Platform-Uno%20%2F%20Mega-blue?style=flat-square)
 ![Libraries](https://img.shields.io/badge/Libraries-None-orange?style=flat-square)
 
