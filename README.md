@@ -173,11 +173,6 @@ Uses **Arduino core only** — works out of the box with any standard Arduino ID
 
 ---
 
-## LICENSE
-
-```
-MIT License — free to use, modify, and distribute.
-```
 
 ---
 
